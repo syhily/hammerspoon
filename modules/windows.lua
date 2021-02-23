@@ -86,37 +86,9 @@ function toggle_maximize()
 end
 
 -- display a keyboard hint for switching focus to each window
-hotkey.bind(hyperShift, '/', function()
+hotkey.bind(hyperCtrl, '/', function()
     hints.windowHints()
-    -- Display current application window
-    -- hints.windowHints(hs.window.focusedWindow():application():allWindows())
 end)
-
--- switch active window
-hotkey.bind(hyperShift, "H", function()
-  window.switcher.nextWindow()
-end)
-
--- move active window to previous monitor
-hotkey.bind(hyperShift, "Left", function()
-  window.focusedWindow():moveOneScreenWest()
-end)
-
--- move active window to next monitor
-hotkey.bind(hyperShift, "Right", function()
-  window.focusedWindow():moveOneScreenEast()
-end)
-
--- move cursor to previous monitor
-hotkey.bind(hyperCtrl, "Left", function ()
-  focusScreen(window.focusedWindow():screen():previous())
-end)
-
--- move cursor to next monitor
-hotkey.bind(hyperCtrl, "Right", function ()
-  focusScreen(window.focusedWindow():screen():next())
-end)
-
 
 --Predicate that checks if a window belongs to a screen
 function isInScreen(screen, win)
@@ -151,18 +123,22 @@ moveto = function(win, n)
   end
 end
 
--- move cursor to monitor 1 and maximize the window
-hotkey.bind(hyperShift, "1", function()
-  local win = window.focusedWindow()
-  moveto(win, 1)
+-- move cursor to previous monitor
+hotkey.bind(hyperCtrl, "[", function ()
+  focusScreen(window.focusedWindow():screen():previous())
 end)
 
-hotkey.bind(hyperShift, "2", function()
-  local win = window.focusedWindow()
-  moveto(win, 2)
+-- move cursor to next monitor
+hotkey.bind(hyperCtrl, "]", function ()
+  focusScreen(window.focusedWindow():screen():next())
 end)
 
-hotkey.bind(hyperShift, "3", function()
-  local win = window.focusedWindow()
-  moveto(win, 3)
+-- move active window to previous monitor
+hotkey.bind(hyperCtrl, "Left", function()
+  window.focusedWindow():moveOneScreenWest()
+end)
+
+-- move active window to next monitor
+hotkey.bind(hyperCtrl, "Right", function()
+  window.focusedWindow():moveOneScreenEast()
 end)
